@@ -1,0 +1,22 @@
+name: Velog Backup
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    # 매일 00:00 (KST 기준 오전 9시)에 자동으로 실행되도록 설정
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 수동으로도 실행 가능하게 설정
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Update Velog Posts
+        uses: wan-da/velog-posts-to-github@v1.1.0
+        with:
+          # 본인의 벨로그 아이디를 입력하세요 (예: velog.io/@userid 의 userid)
+          velog_username: 'beam0331'
