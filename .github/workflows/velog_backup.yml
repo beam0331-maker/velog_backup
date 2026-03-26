@@ -5,9 +5,8 @@ on:
     branches:
       - main
   schedule:
-    # 매일 00:00 (KST 기준 오전 9시)에 자동으로 실행되도록 설정
-    - cron: '0 0 * * *'
-  workflow_dispatch: # 수동으로도 실행 가능하게 설정
+    - cron: '0 0 * * *' # 매일 오전 9시 (KST)
+  workflow_dispatch: # 수동 실행 버튼 활성화
 
 jobs:
   build:
@@ -15,8 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Update Velog Posts
-        uses: wan-da/velog-posts-to-github@v1.1.0
+      - name: Velog Backup Action
+        uses: gaemi/velog-backup@v0.2.0
         with:
-          # 본인의 벨로그 아이디를 입력하세요 (예: velog.io/@userid 의 userid)
-          velog_username: 'beam0331'
+          # 본인의 벨로그 아이디를 입력하세요
+          user_id: '본인의_벨로그_아이디'
+          # 폴더 이름을 지정할 수 있습니다 (기본값은 posts)
+          folder: 'TIL'
